@@ -1,0 +1,21 @@
+
+.fondoC{
+    position: absolute;
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('../../../img/fondoC.jpg');
+}
+
+.contenedor{
+    background-color: rgba(8, 11, 40, 0.8);
+    border: #BA001F solid;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    padding: 80px;
+}
+#ingresar{ 
+    background-color: #BA001F ;
+    border: #BA001F solid;
+}
+#ingresar:hover{
+    background-color: black;
+}

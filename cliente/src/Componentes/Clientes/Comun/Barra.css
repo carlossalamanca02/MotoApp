@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.container {
+  position: fixed;
+  height: 100vh;
+  width: 15%;
+  background: #080B28;
+  justify-content: center;
+}
+
+.nav {
+  position: relative;
+  text-align: center;;
+}
+
+ul{
+  list-style: none;
+}
+
+li {
+  border-bottom: white solid;
+  text-align: center;
+
+}
+
+a {
+
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+  display: block;
+}
+a:hover{
+  color:#BA001F;
+}
+
+.active a {
+  color: black;
+  background-color:#BA001F;
+}
+
+::after {
+  position: absolute;
+  background: black;
+}
+p{
+  color: white;
+  text-align: center;
+}
+
+.user{
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.taller{
+  border-bottom: white solid;
+}
