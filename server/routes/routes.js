@@ -26,6 +26,23 @@ router.post('/logWorker',async(req,res)=>{
         res.send("3")
     }
 });
+router.post('/logCustomer', (req,res)=>{
+    const placa= req.body.placa;
+    const cedula= req.body.cedula;
+    if(placa && cedula){
+        connection.query('SELECT* FROM moto WHERE placa = ?',[placa],  (error, results)=>{
+            if(results.length == 0 || results[0].id_cliente == cedula){
+                //error de cedula o placa
+                res.send("1");
+            }else{
+                //Entro
+                res.send("2");
+            }
+        })
+    }else{
+        //Campos vacios
+    }
+});
 
 
 module.exports = router

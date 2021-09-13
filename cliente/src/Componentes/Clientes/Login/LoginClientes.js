@@ -18,6 +18,26 @@ class LoginClientes extends Component{
         });
         console.log(this.state.form);
     }
+    peticion(){
+        var dat={"cedula": document.getElementById("Id").value, "placa": document.getElementById("Placa").value}
+        var url='http://localhost:9000/logCustomer'
+        fetch(url,{
+            method:'post',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(dat)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data==1){
+                alert("cedula y/o placa mal")
+            }else if(data==2){
+                alert("correcto")
+            }else{
+                alert("campos vacios")
+            }
+
+        })        
+    }
     render(){
         return(
             <section className="container-fluid h-100 fondoC">
@@ -27,9 +47,9 @@ class LoginClientes extends Component{
                             <h3>INGRESAR</h3>
                             <p>Ingrese sus datos</p>
                             <section className="form-group">
-                                <input type="text" className="form-control form-control mb-3" placeholder="Cedula" name="cedula" onChange={this.capturarCambios}/>
-                                <input type="password" className="form-control form-control mb-3" placeholder="Placa" name="placa" onChange={this.capturarCambios}/>
-                                <button className="btn btn-primary" id="ingresar">Ingresar</button>
+                                <input id= "Id" type="text" className="form-control form-control mb-3" placeholder="Cedula" name="cedula" onChange={this.capturarCambios}/>
+                                <input id="Placa" type="password" className="form-control form-control mb-3" placeholder="Placa" name="placa" onChange={this.capturarCambios}/>
+                                <button onClick={this.peticion} className="btn btn-primary" id="ingresar">Ingresar</button>
                             </section>
                         </section>
                     </section>
