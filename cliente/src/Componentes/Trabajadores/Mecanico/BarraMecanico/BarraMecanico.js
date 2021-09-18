@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import './Barra.css';
+import './BarraMecanico.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Link } from 'react-router-dom';
-import { itemsBarra } from "./itemsBarra";
+import { itemsMecanico } from "./itemsMecanico";
 import { FaBars, FaUser } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
 
-function Barra(){
+function BarraMecanico(){
     const [desplegable,setDesplegable] = useState(false);
     const mostrarDesplegable = () => setDesplegable(!desplegable);
 
@@ -29,12 +29,12 @@ function Barra(){
                             <FaUser/>
                         </div>
                         <div className="credenciales">
-                            <p>Nombre Cliente</p>
-                            <p>Moto</p>
+                            <p>Nombre Mecanico</p>
+                            <p>Codigo</p>
                         </div>
                         
                     </li>
-                    {itemsBarra.map((item,index) => {
+                    {itemsMecanico.map((item,index) => {
                         return(
                             <li key={index} className={item.cName}>
                                 <Link to={item.path}>
@@ -50,4 +50,4 @@ function Barra(){
     );
 }
 
-export default Barra;
+export default BarraMecanico;

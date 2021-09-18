@@ -1,0 +1,67 @@
+.titulor{
+    padding: 20px;
+    border: black solid;
+    box-shadow: 2px 2px 3px black;
+}
+.iconoRegistro{
+    font-size: 40px;
+}
+.iconoActualizar{
+    font-size: 40px;
+}
+.contenedorprincipal{
+    padding: 20px;
+    border: black solid;
+    box-shadow: 2px 2px 3px black;
+}
+.cliente{
+    background-color: #BA001F;
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-right: 10px;
+    
+}
+
+.cuadrocliente{
+    margin: 5px;
+}
+.motocicleta{
+    background-color: #080B28;
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-left: 10px;
+ 
+}
+
+.cuadromotocicleta{
+    margin: 5px;
+}
+
+.servicio{
+    background-color: black;
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-left: 1px;
+}
+.btncliente{
+    background-color:black;
+}
+.btncliente:hover{
+    background-color: #080B28;
+}
+
+.btnmoto{
+    background-color:#BA001F;
+}
+.btnmoto:hover{
+    background-color: #080B28;
+}
+.btnregistro{
+    background-color:#BA001F;
+}
+.btnregistro:hover{
+    background-color: #080B28;
+}

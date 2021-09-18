@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: row;
 
+
   }
   
   .navbar-item {
@@ -15,4 +16,8 @@
     text-decoration: inherit;
     text-transform: uppercase;
     outline: none;
+
+  }
+  a{
+
   }

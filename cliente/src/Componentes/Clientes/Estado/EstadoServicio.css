@@ -1,0 +1,47 @@
+.tituloe{
+    padding: 20px;
+    border: black solid;
+    box-shadow: 2px 2px 3px black;
+}
+.iconoEstado{
+    font-size: 40px;
+}
+.contenedorp{
+    padding: 20px;
+    border: black solid;
+    box-shadow: 2px 2px 3px black;
+}
+.actual{
+    background-color: #BA001F;
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-right: 10px;
+    
+}
+.estado{
+    background-color: #080B28;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+.cuadro{
+    margin: 10px;
+}
+.actualizacion{
+    background-color: black;
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-left: 10px;
+ 
+}
+.fecha{
+    background-color: #080B28;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+.cuadroactualización{
+    margin: 10px;
+}
