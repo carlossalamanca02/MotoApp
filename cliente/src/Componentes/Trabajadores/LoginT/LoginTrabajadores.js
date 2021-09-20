@@ -1,25 +1,13 @@
 import React, {Component} from "react";
 import './LoginTrabajadores.css'
-
+import { withRouter,Redirect } from 'react-router-dom';
 class LoginTrabajadores extends Component{
     state={
-        form:{
-            usuario:'',
-            contraseña:''
-        }
+        redirect: false,
+        redirect2: false
     }
-    /*
-    capturarCambios=async e=>{
-        await this.setState({
-            form:{
-                ...this.state.form,
-                [e.target.name]: e.target.value
-            }
-        });
-        console.log(this.state.form);
-    }
-    */
-    peticion(){
+ 
+    peticion=()=>{
         var dat={"user": document.getElementById("User").value, "pass": document.getElementById("Pass").value}
         var url='http://localhost:9000/logWorker'
        
@@ -32,17 +20,27 @@ class LoginTrabajadores extends Component{
         .then(data => {
             if(data==1){
                 alert("contraseña y/o usuarios mal")
-            }else if(data==2){
-                alert("correcto")
+            }else if(data.res==2){
+                if (data.op==0){
+                    this.setState({redirect2: true}) 
+                }else if(data.op==1){
+                    this.setState({redirect: true}) 
+                }
             }else{
                 alert("campos vacios")
             }
 
         })
-    
-
     }
+
     render(){
+        const {redirect}=this.state;
+        const {redirect2}=this.state;
+        if(redirect){
+            return <Redirect to="/AñadirServicioMecanico"/>
+        }else if(redirect2){
+            return <Redirect to="/"/>
+        }
         return(
             <section>
                 <section className="container-fluid h-100 fondoT">

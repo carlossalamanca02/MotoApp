@@ -19,11 +19,13 @@
   }
   
   .header-logo {
-    color: black;
+    color: white;
     text-decoration: inherit;
-    font-family:'Lato', sans-serif;
+    font-family:'Lato';
+    font-weight: bold;
     font-size: 30px;
     background-color:#BA001F;
+
   }
   
   .header-top__navbar {

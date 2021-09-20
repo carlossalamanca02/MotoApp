@@ -19,6 +19,37 @@ class RegistrarServicio extends Component{
                         </div>
                     </div>
                     <div className="row contenedorprincipal">
+                        
+                    <div className="col-sm 6 mb-3 motocicleta">
+                            <div className="row titulomotocicleta">
+                                <h4>MOTOCICLETA</h4>
+                            </div>
+                            <div className="row  mb-3  cuadromotocicleta">
+                                <form className="form-group">
+                                    <div className="row justify-content-center">
+                                        <div className="col-sm-8 mb-3">
+                                            <input className="form-control" type="text" placeholder="Placa" name="placa"></input>
+                                        </div>
+                                        <div className="col-sm-2 mb-3">
+                                            <button className="btn btn-primary btnmoto">Buscar</button>
+                                        </div>
+                                        <div className="col-sm-8 mb-3">
+                                            <input className="form-control" type="text" placeholder="Modelo" name="modelo"></input>
+                                        </div>
+                                        <div className="col-sm-8 mb-3">
+                                            <input className="form-control" type="text" placeholder="Marca" name="marca"></input>
+                                        </div>
+                                        <div className="col-sm-8 mb-3">
+                                            <input className="form-control" type="text" placeholder="Linea" name="linea"></input>
+                                        </div>  
+                                  </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
                         <div className="col-sm 6 mb-3  cliente">
                             <div className="row titulocliente">
                                 <h4>CLIENTE</h4>
@@ -29,7 +60,7 @@ class RegistrarServicio extends Component{
                                         <div className="col-sm-8 mb-3">
                                             <input className="form-control" type="text" placeholder="Cedula" name="cedula"></input>
                                         </div>
-                                        <div className="col-sm-2">
+                                        <div className="col-sm-2 mb-3">
                                             <button className="btn btn-primary btncliente">Buscar</button>
                                         </div>
                                         <div className="col-sm-8 mb-3">
@@ -52,32 +83,7 @@ class RegistrarServicio extends Component{
                                 </form>
                             </div>
                         </div>
-                        <div className="col-sm 6 mb-3 motocicleta">
-                            <div className="row titulomotocicleta">
-                                <h4>MOTOCICLETA</h4>
-                            </div>
-                            <div className="row  mb-3  cuadromotocicleta">
-                                <form className="form-group">
-                                    <div className="row justify-content-center">
-                                        <div className="col-sm-8 mb-3">
-                                            <input className="form-control" type="text" placeholder="Placa" name="placa"></input>
-                                        </div>
-                                        <div className="col-sm-2">
-                                            <button className="btn btn-primary btnmoto">Buscar</button>
-                                        </div>
-                                        <div className="col-sm-8 mb-3">
-                                            <input className="form-control" type="text" placeholder="Nombre" name="nombre"></input>
-                                        </div>
-                                        <div className="col-sm-8 mb-3">
-                                            <input className="form-control" type="text" placeholder="Marca" name="marca"></input>
-                                        </div>
-                                        <div className="col-sm-8 mb-3">
-                                            <input className="form-control" type="text" placeholder="Linea" name="linea"></input>
-                                        </div>  
-                                  </div>
-                                </form>
-                            </div>
-                        </div>
+                        
                         <div className="row  servicio">
                             <div className="row tituloServicio">
                                 <h4>SERVICIO</h4>

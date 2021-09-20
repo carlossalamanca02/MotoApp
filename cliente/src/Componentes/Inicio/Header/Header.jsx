@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from '../../Inicio';
 import './Header.css'
+import { Link } from 'react-router-dom';
 function Header (){
     return (
         <section className="header">
@@ -8,8 +9,8 @@ function Header (){
           <section className="header-top__logo">
             
             <a href="/" className="header-logo">
-              <img src={process.env.PUBLIC_URL + '/Logo.png'} className="logo"/>
-              MOTOAPP
+              <img src={process.env.PUBLIC_URL + '/Logo.png'} className="logo"/>             
+                MOTOAPP
               </a>     
           </section>
           <section className="header-top__navbar">
@@ -24,8 +25,8 @@ function Header (){
             CON NUESTRA APP WEB DESTINADA A QUE ESTÉS AL TANTO DEL ESTADO DE TU MOTOCICLETA
             Y LOS CAMBIOS QUE SE HACEN EN ELLA.</p></section>
           <section className="buttons-intro">
-            <button className="client-button">¿ERES CLIENTE?</button>
-            <button className="personal-button">¿TRABAJA CON NOSOTROS?</button>
+            <Link to="/LoginCliente"><button className="client-button">¿ERES CLIENTE?</button></Link>
+            <Link to="LoginTrabajadores"><button className="personal-button">¿TRABAJA CON NOSOTROS?</button></Link>
           </section>
         </section>
       </section>

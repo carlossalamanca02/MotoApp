@@ -1,14 +1,19 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './LoginClientes.css'
+import { Redirect } from "react-router";
 
 class LoginClientes extends Component{
-    state={
+    /*state={
         form:{
             cedula:'',
             placa:''
         }
-    }
+
+    }*/
+    state={redirect:false}
+
+
     capturarCambios=async e=>{
         await this.setState({
             form:{
@@ -18,7 +23,7 @@ class LoginClientes extends Component{
         });
         console.log(this.state.form);
     }
-    peticion(){
+    peticion = () => {
         var dat={"cedula": document.getElementById("Id").value, "placa": document.getElementById("Placa").value}
         var url='http://localhost:9000/logCustomer'
         fetch(url,{
@@ -31,7 +36,7 @@ class LoginClientes extends Component{
             if(data==1){
                 alert("cedula y/o placa mal")
             }else if(data==2){
-                alert("correcto")
+                this.setState({redirect: true}) 
             }else{
                 alert("campos vacios")
             }
@@ -39,6 +44,10 @@ class LoginClientes extends Component{
         })        
     }
     render(){
+        const {redirect}=this.state;
+        if(redirect){
+            return <Redirect to="/AñadirServicioMecanico"/>
+        }
         return(
             <section className="container-fluid h-100 fondoC">
                 <section className="row justify-content-center h-100">
