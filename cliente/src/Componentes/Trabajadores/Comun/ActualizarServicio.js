@@ -1,11 +1,13 @@
 import React,{Component} from "react";
 import {GrDocumentUpdate } from 'react-icons/gr'
 import './Servicio.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 class ActualizarServicio extends Component{
     render(){
         return(
             <div className="container">
-                    <div className="row titulo mb-3">
+                    <div className="row titulor mb-3">
                         <div className="col-sm-1 iconoActualizar">
                             <GrDocumentUpdate/>
                         </div>
@@ -33,15 +35,18 @@ class ActualizarServicio extends Component{
                         <div className="col-sm-6">
                             <form className="form-group">
                                 <div className="row">
-                                    <div className="col-sm-8">
-                                        <select className="form-group">
+                                    <div className="col-sm-8 mb-3">
+                                        <select className="form-control">
                                             <option>Motocicleta</option>
-                                            
-
                                         </select>
-
                                     </div>
-
+                                    <div className="col-sm-8 mb-3">
+                                        <label for="exampleFormControlFile1">Fotos o videos</label>
+                                        <input type="file" class="form-control-file" id="exampleFormControlFile1"></input>
+                                    </div>
+                                    <div className="col-sm-8 mb-3">
+                                        <button className="btn btn-primary btnmoto">Actualizar</button>
+                                    </div>
                                 </div>
 
                             </form>

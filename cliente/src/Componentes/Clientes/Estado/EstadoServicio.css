@@ -2,6 +2,7 @@
     padding: 20px;
     border: black solid;
     box-shadow: 2px 2px 3px black;
+    border-radius: 18px;
 }
 .iconoEstado{
     font-size: 40px;
@@ -10,6 +11,7 @@
     padding: 20px;
     border: black solid;
     box-shadow: 2px 2px 3px black;
+    border-radius: 18px;
 }
 .actual{
     background-color: #BA001F;
@@ -17,13 +19,14 @@
     text-align: center;
     align-content: center;
     margin-right: 10px;
-    
+    border-radius: 18px;
 }
 .estado{
     background-color: #080B28;
     color: white;
     text-align: center;
     padding: 30px;
+    border-radius: 18px;
 }
 .cuadro{
     margin: 10px;
@@ -34,6 +37,7 @@
     text-align: center;
     align-content: center;
     margin-left: 10px;
+    border-radius: 18px;
  
 }
 .fecha{
@@ -41,6 +45,7 @@
     color: white;
     text-align: center;
     padding: 30px;
+    border-radius: 18px;
 }
 .cuadroactualización{
     margin: 10px;
