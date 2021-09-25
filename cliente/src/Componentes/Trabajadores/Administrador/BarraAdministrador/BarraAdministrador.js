@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import './BarraMecanico.css';
+import './BarraAdministrador.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Link } from 'react-router-dom';
 import { itemsAdministrador, itemsMecanico } from "./itemsAdministrador";

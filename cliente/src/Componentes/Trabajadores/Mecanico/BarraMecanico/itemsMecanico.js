@@ -1,7 +1,9 @@
 
 import React from 'react';
-import { FaExchangeAlt, FaMotorcycle } from 'react-icons/fa'
-import {  AiFillFileAdd, AiOutlineDatabase, AiOutlineFileSearch, AiOutlineLogout } from 'react-icons/ai'
+import { FaExchangeAlt } from 'react-icons/fa'
+import {  AiFillFileAdd,  AiOutlineFileSearch, AiOutlineLogout } from 'react-icons/ai'
+import { GiProgression  } from 'react-icons/gi'
+
 
 export const itemsMecanico = [
   {
@@ -11,8 +13,14 @@ export const itemsMecanico = [
     cName: 'nav-text'
   },
   {
-    title: 'Actualizar servicio',
-    path: '/ActualizarServicioM',
+    title: 'Añadir Progreso',
+    path: '/AñadirProgresoM',
+    icon: <GiProgression/>,
+    cName: 'nav-text' 
+  },
+  {
+    title: 'Gestionar Servicios',
+    path: '/GestionarServiciosM',
     icon: <FaExchangeAlt/>,
     cName: 'nav-text' 
   },

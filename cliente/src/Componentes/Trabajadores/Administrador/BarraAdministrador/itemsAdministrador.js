@@ -1,43 +1,51 @@
 
 import React from 'react';
-import { FaMotorcycle } from 'react-icons/fa'
-import {  AiOutlineDatabase, AiOutlineLogout } from 'react-icons/ai'
+import { FaExchangeAlt, FaUserCog, FaMotorcycle} from 'react-icons/fa'
+import {  AiFillFileAdd, AiOutlineUserAdd, AiOutlineLogout } from 'react-icons/ai'
+import {  GiProgression } from 'react-icons/gi'
+import {  HiDocumentSearch } from 'react-icons/hi'
 
 export const itemsAdministrador = [
   {
     title: 'Resgistrar servicio',
-    path: '/RegistrarServicio',
-    icon: < AiOutlineDatabase />,
+    path: '/AgregarServicioA',
+    icon: < AiFillFileAdd />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Añadir Progreso',
+    path: '/AñadirProgresoA',
+    icon: <GiProgression/>,
     cName: 'nav-text'
   },
   {
     title: 'Gestionar servicios',
-    path: '/GestionarServicio',
-    icon: <FaMotorcycle/>,
+    path: '/GestionarServiciosA',
+    icon: <FaExchangeAlt/>,
     cName: 'nav-text'
   },
   {
     title: 'Agregar personal',
     path: '/',
-    icon: <AiOutlineLogout/>,
+    icon: <AiOutlineUserAdd/>,
     cName: 'nav-text'
   },
   {
     title: 'Gestionar personal',
     path: '/',
-    icon: <AiOutlineLogout/>,
+    icon: <FaUserCog/>,
     cName: 'nav-text'
   },
   {
     title: 'Registrar pieza',
     path: '/',
-    icon: <AiOutlineLogout/>,
+    icon: <FaMotorcycle/>,
     cName: 'nav-text'
   },
   {
     title: 'Gestionar piezas',
     path: '/',
-    icon: <AiOutlineLogout/>,
+    icon: <HiDocumentSearch/>,
     cName: 'nav-text'
   },
   {

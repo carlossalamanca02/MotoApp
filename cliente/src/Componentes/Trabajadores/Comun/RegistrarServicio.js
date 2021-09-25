@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { BarraMecanico } from "../Mecanico";
 import {AiFillFileAdd } from 'react-icons/ai'
 import './Servicio.css'
 
@@ -46,10 +45,7 @@ class RegistrarServicio extends Component{
                                 </form>
                             </div>
                         </div>
-                        
-                        
-                        
-                        
+
                         <div className="col-sm 6 mb-3  cliente">
                             <div className="row titulocliente">
                                 <h4>CLIENTE</h4>

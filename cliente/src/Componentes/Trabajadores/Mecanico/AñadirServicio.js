@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BarraMecanico } from ".";
-import { RegistrarServicio } from ".";
+import { RegistrarServicio } from "..";
 
 
 
