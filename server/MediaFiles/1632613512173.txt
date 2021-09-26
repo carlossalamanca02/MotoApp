@@ -1,0 +1,166 @@
+         CLIPS (Quicksilver Beta 3/26/08)
+CLIPS> (assert(h1))
+<Fact-1>
+CLIPS> (facts)
+f-0     (initial-fact)
+f-1     (h1)
+For a total of 2 facts.
+CLIPS> (assert(h2))
+<Fact-2>
+CLIPS> (assert(h3))
+<Fact-3>
+CLIPS> (assert(h4))
+<Fact-4>
+CLIPS> (assert(h5))
+<Fact-5>
+CLIPS> (assert(h6))
+<Fact-6>
+CLIPS> (assert(h7))
+<Fact-7>
+CLIPS> (assert(h8))
+<Fact-8>
+CLIPS> (assert(h9))
+<Fact-9>
+CLIPS> (facts)
+f-0     (initial-fact)
+f-1     (h1)
+f-2     (h2)
+f-3     (h3)
+f-4     (h4)
+f-5     (h5)
+f-6     (h6)
+f-7     (h7)
+f-8     (h8)
+f-9     (h9)
+For a total of 10 facts.
+CLIPS> (defrule R1 (h8)(h6)(h5) => (assert(h4)))
+CLIPS> (rules)
+R1
+For a total of 1 defrule.
+CLIPS> (defrule R2 (h6)(h3) => (assert(h9)))
+CLIPS> (defrule R3 (h7)(h4) => (assert(h9)))
+CLIPS> (defrule R4 (h8) => (assert(h1)))
+CLIPS> (defrule R5 (h6) => (assert(h5)))
+CLIPS> (defrule R6 (h9)(h1) => (assert(h2)))
+CLIPS> (defrule R7 (h7) => (assert(h6)))
+CLIPS> (defrule R8 (h1)(h7) => (assert(h9)))
+CLIPS> (defrule R9 (h1)(h8)n=> (assert(h6)))
+
+[PRNTUTIL2] Syntax Error:  Check appropriate syntax for defrule.
+
+ERROR:
+(defrule MAIN::R9
+   (h1)
+   (h8)
+   n=>
+CLIPS> (defrule R9 (h1)(h8) => (assert(h6)))
+CLIPS> (rules)
+R1
+R2
+R3
+R4
+R5
+R6
+R7
+R8
+R9
+For a total of 9 defrules.
+CLIPS> (rules)
+R1
+R2
+R3
+R4
+R5
+R6
+R7
+R8
+R9
+For a total of 9 defrules.
+CLIPS> (agenda)
+0      R9: f-1,f-8
+0      R8: f-1,f-7
+0      R7: f-7
+0      R6: f-9,f-1
+0      R5: f-6
+0      R4: f-8
+0      R3: f-7,f-4
+0      R2: f-6,f-3
+0      R1: f-8,f-6,f-5
+For a total of 9 activations.
+CLIPS> (reset)
+<== Focus MAIN
+==> Focus MAIN
+MSG >> delete ED:1 (<Instance-initial-object>)
+HND >> delete primary in class USER
+       ED:1 (<Instance-initial-object>)
+<== instance [initial-object] of INITIAL-OBJECT
+HND << delete primary in class USER
+       ED:1 (<Stale Instance-initial-object>)
+MSG << delete ED:1 (<Stale Instance-initial-object>)
+<== f-0     (initial-fact)
+<== f-1     (h1)
+<== Activation 0      R9: f-1,f-8
+<== Activation 0      R8: f-1,f-7
+<== Activation 0      R6: f-9,f-1
+<== f-2     (h2)
+<== f-3     (h3)
+<== Activation 0      R2: f-6,f-3
+<== f-4     (h4)
+<== Activation 0      R3: f-7,f-4
+<== f-5     (h5)
+<== Activation 0      R1: f-8,f-6,f-5
+<== f-6     (h6)
+<== Activation 0      R5: f-6
+<== f-7     (h7)
+<== Activation 0      R7: f-7
+<== f-8     (h8)
+<== Activation 0      R4: f-8
+<== f-9     (h9)
+==> instance [initial-object] of INITIAL-OBJECT
+MSG >> create ED:1 (<Instance-initial-object>)
+HND >> create primary in class USER
+       ED:1 (<Instance-initial-object>)
+HND << create primary in class USER
+       ED:1 (<Instance-initial-object>)
+MSG << create ED:1 (<Instance-initial-object>)
+MSG >> init ED:1 (<Instance-initial-object>)
+HND >> init primary in class USER
+       ED:1 (<Instance-initial-object>)
+HND << init primary in class USER
+       ED:1 (<Instance-initial-object>)
+MSG << init ED:1 (<Instance-initial-object>)
+==> f-0     (initial-fact)
+CLIPS> (assert (h7)(h8))
+==> f-1     (h7)
+==> Activation 0      R7: f-1
+==> f-2     (h8)
+==> Activation 0      R4: f-2
+<Fact-2>
+CLIPS> (run)
+FIRE    1 R4: f-2
+==> f-3     (h1)
+==> Activation 0      R9: f-3,f-2
+==> Activation 0      R8: f-3,f-1
+FIRE    2 R8: f-3,f-1
+==> f-4     (h9)
+==> Activation 0      R6: f-4,f-3
+FIRE    3 R6: f-4,f-3
+==> f-5     (h2)
+FIRE    4 R9: f-3,f-2
+==> f-6     (h6)
+==> Activation 0      R5: f-6
+FIRE    5 R5: f-6
+==> f-7     (h5)
+==> Activation 0      R1: f-2,f-6,f-7
+FIRE    6 R1: f-2,f-6,f-7
+==> f-8     (h4)
+==> Activation 0      R3: f-1,f-8
+FIRE    7 R3: f-1,f-8
+FIRE    8 R7: f-1
+<== Focus MAIN
+8 rules fired        Run time is 0.0790000000001783 seconds.
+101.265822784582 rules per second.
+7 mean number of facts (9 maximum).
+1 mean number of instances (1 maximum).
+2 mean number of activations (3 maximum).
+CLIPS> 

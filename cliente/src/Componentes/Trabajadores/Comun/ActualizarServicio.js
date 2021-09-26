@@ -33,30 +33,31 @@ class ActualizarServicio extends Component{
                             </table>
                         </div>
                         <div className="col-sm-6">
-                            <form className="form-group">
+                            <form action="http://localhost:9000/sendfile" method="post" encType="multipart/form-data"  className="form-group">
                                 <div className="row">
                                     <div className="col-sm-8 mb-3">
-                                        <select className="form-control">
-                                            <option>Motocicleta</option>
+                                        <select className="form-control" name="placa">
+                                            <option>Seleccione</option>
                                         </select>
                                     </div>
                                     <div className="col-sm-8 mb-3">
                                         <label for="exampleFormControlFile1">Fotos o videos</label>
-                                        <input type="file" class="form-control-file" id="archivo"></input>
+                                        <input multiple="multiple" type="file" className="form-control-file" name="files" id="archivo"></input>
                                     </div>
                                     <div className="col-sm-8 mb-3">
-                                        <label for="exampleFormControlFile1">Fecha de registro</label>
-                                        <input type="date" class="form-control" id="fechaCambio"></input>
+                                        <label for="exampleFormControlFile1">Descripción</label>
+                                        <textarea className="form-control" name="description"></textarea>
+                                        
                                     </div>
                                     <div className="col-sm-8 mb-3">
                                         <label for="exampleFormControlFile1">Estado</label>
-                                        <select className="form-control">
+                                        <select className="form-control" name="estado">
                                             <option>En proceso</option>
                                             <option>Finalizado</option>
                                         </select>
                                     </div>
                                     <div className="col-sm-8 mb-3">
-                                        <button className="btn btn-primary btnmoto">Actualizar</button>
+                                        <button className="btn btn-primary btnmoto" type="submit">Actualizar</button>
                                     </div>
                                 </div>
 
