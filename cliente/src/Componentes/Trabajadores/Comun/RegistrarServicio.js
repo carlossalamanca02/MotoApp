@@ -2,7 +2,38 @@ import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {AiFillFileAdd } from 'react-icons/ai'
 import './Servicio.css'
+import Swal from 'sweetalert2'
+
 class RegistrarServicio extends Component{
+    state ={
+        cedulaAdvertencia:false,
+        cedulaError:false,
+        placa:false,
+        correo:false,
+        advertenciamodelo1:false,
+        advertenciamodelo2:false
+    }
+
+    advertenciaCedula = ()=>{
+        Swal.fire("Cedula", "la cedula es un valor ente 8 y 10 digitos, sin puntos ni comas","warning")   
+    }
+    alertaCedula = ()=>{
+        Swal.fire("Campo incorrecto","Número de cedula invalido","error")   
+    }
+    alertaPlaca = ()=>{
+        Swal.fire("Campo incorrecto","La placa no es valida","error")   
+    }
+    alertaCorreo = ()=>{
+        Swal.fire("Campo incorrecto","El correo ingresado no es valido","error")   
+    }
+    advertenciaModeloLetras = ()=>{
+        Swal.fire("Modelo","El modelo no acepta letras","Warning")   
+    }
+    advertenciaModeloaño = ()=>{
+        var anio = fecha.getFullYear();
+        var fecha = new Date();
+        Swal.fire("Modelo","El modelo debe estar entre 1970 y "+anio,"Warning")   
+    }
 
     peticion=()=>{
         var placa = document.getElementById("placa").value.ToUpperCase();
@@ -17,56 +48,75 @@ class RegistrarServicio extends Component{
         var correo = document.getElementById("correo").value.ToUpperCase();
         alert(placa +" "+ modelo+ " "+ linea+" "+marca+" "+cedula+" "+nombre+" "+apellido+" "+direccion+" "+celular+" "+correo);
     }
-    validacionCedula(){
+    validacionCedula=()=>{
         var valor = document.getElementById("cedula").value;
         let cedulaER = /^[0-9]{8,10}$/;
         if(valor.length>=1){
             if(!cedulaER.test(valor)){
-                alert("la cedula es un valor ente 8 y 10 digitos, sin '.' ni ','");
+                this.setState({advertenciaCedula:true});
             }
         }
     }
-    validacionCelular(){
+    validacionCelular=()=>{
         var valor = document.getElementById("celular").value;
         let celularER= /^[3][0][0-5]{1}[0-9]{7}|[3][1][0-9]{8}|[3][2][0-3]{1}[0-9]{7}|[3][5][0-1]{1}[0-9]{7}$/;
         if(valor.length>=1){    
             if(!celularER.test(valor)){
-                alert("Numero incorrecto");
+                this.setState({cedulaError:true});
             }
         }
     }
-    validacionPla(){
+    validacionPla=()=>{
         var valor = document.getElementById("placa").value;
         let placaER = /^(([A-Za-z]{3})+([0-9]{2})+([A-Za-z]{1}))$/;
         if(valor.length>=1){
             if (!placaER.test(valor)){
-                alert("Placa invalida");
+                this.setState({placa:true});
             }
         }
     }
-    validacionCorreo(){
+    validacionCorreo=()=>{
         var valor = document.getElementById("correo").value;
         let placaER = /^[0-9a-z]{1,20}[.]{0,1}[0-9a-z]{1,20}[@]{1}([\w.-]+\.[a-z]{2,6})$/;
         if(valor.length>=1){
             if (!placaER.test(valor)){
-                alert("Correo incorrecto");
+                this.setState({correo:true});
             }
         }
     }   
-    validacionMod(){
+    validacionMod=()=>{
         var valor = document.getElementById("modelo").value;
         if( isNaN(valor)) {
-            alert("No se aceptan letras")
+            this.setState({advertenciamodelo1:true});
         }else{
             var num=parseInt(valor, 10);
             var fecha = new Date();
             var anio = fecha.getFullYear();
             if(num <= 1969 || num >= anio+1){
-                alert("El modelo debe estar entre 1970 y "+anio);
+                this.setState({advertenciamodelo2:true});
             }
         }
     }
     render(){
+        const {advertenciaCedula}=this.state;
+        const {cedulaError}=this.state;
+        const {placa}=this.state;
+        const {correo}=this.state;
+        const {advertenciamodelo1}=this.state;
+        const {advertenciamodelo2}=this.state;
+        if(advertenciaCedula){
+            this.advertenciaCedula()
+        }else if(cedulaError){
+            this.alertaCedula();
+        }else if(placa){
+            this.alertaPlaca();
+        }else if(correo){
+            this.alertaCorreo();
+        }else if(advertenciamodelo1){
+            this.advertenciaModeloLetras();
+        }else if(advertenciamodelo2){
+            this.advertenciaModeloaño();
+        }
         return(
             <>
             <div className="container">
@@ -89,9 +139,6 @@ class RegistrarServicio extends Component{
                                     <div className="row justify-content-center">
                                         <div className="col-sm-8 mb-3">
                                             <input id="placa" className="form-control" type="text" placeholder="Placa" name="placa" onBlur={this.validacionPla}></input>
-                                        </div>
-                                        <div className="col-sm-2 mb-3">
-                                            <button className="btn btn-primary btnmoto">Buscar</button>
                                         </div>
                                         <div className="col-sm-8 mb-3">
                                             <input id="modelo" className="form-control" type="text" placeholder="Modelo" name="modelo" onBlur={this.validacionMod}></input>
@@ -117,9 +164,6 @@ class RegistrarServicio extends Component{
                                   <div className="row justify-content-center">
                                         <div className="col-sm-8 mb-3">
                                             <input id="cedula" className="form-control" type="text" placeholder="Cedula" name="cedula" onBlur={this.validacionCedula}></input>
-                                        </div>
-                                        <div className="col-sm-2 mb-3">
-                                            <button className="btn btn-primary btncliente">Buscar</button>
                                         </div>
                                         <div className="col-sm-8 mb-3">
                                             <input id="nombre" className="form-control" type="text" placeholder="Nombre" name="nombre"></input>

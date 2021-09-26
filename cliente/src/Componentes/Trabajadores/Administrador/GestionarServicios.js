@@ -5,7 +5,6 @@ import {FcSearch} from 'react-icons/fc'
 import { GrUpdate } from "react-icons/gr";
 import './GestionarServicios.css'
 import { AiFillDelete } from "react-icons/ai";
-import TablaConsultas from "./TablaConsulta";
 class GestionarServicios extends Component{
     render(){
         return(
