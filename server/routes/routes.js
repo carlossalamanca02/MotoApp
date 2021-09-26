@@ -5,6 +5,21 @@ const path= require('path');
 const dotenv= require('dotenv');
 dotenv.config({path:'./env/.env'});
 const connection = require(path.join(__dirname,'../db/db'));
+const multer=require('multer')
+const mimetypes = require('mime-types')
+
+const storage=  multer.diskStorage({
+    destination: 'MediaFiles',
+    filename: function(req,file,cb){
+        var name=Date.now()+"."+mimetypes.extension(file.mimetype)
+        cb("",name);
+        connection.query('insert into estado set ?',{nombre_multimedia:name})
+
+    }
+})
+const upload = multer({
+    storage: storage
+})
 router.post('/logWorker',async(req,res)=>{
     //let passe= await bycryp.hash("12345",8);
     //connection.query('insert into trabajador set ?',{codigo:"1007196929",id_cargo:"1001",id_taller:"123456789",cedula:"1007196929",nombre:"Erika Valentina",apellido:"Tinjaca Cely",usuario:"evtc",contraseña:passe,direccion:"Sogamoso",celular:"3132444663"})
@@ -117,4 +132,22 @@ router.post('/addservice',(req,res)=>{
         res.send({"res":"Campos insuficientes"})
     }
 })
+router.post('/sendfile',upload.any('files'),(req,res)=>{
+    var placa=req.body.placa
+    var descripcion=req.body.description
+    var estado=req.body.estado
+    var files= req.files
+    var cont = 0
+    for (x of files){
+        connection.query('select id from estado where id=(select max(id-'+cont+') from estado)',(error,results)=>{
+            console.log(results[0].id)
+            var sql= 'update estado set descripcion="'+descripcion+'" ,estado="'+estado+'" where id='+results[0].id
+            connection.query(sql)
+        })
+        
+        cont++
+    }
+    
+})
+
 module.exports = router
