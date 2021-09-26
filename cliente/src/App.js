@@ -3,7 +3,8 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import { Header } from './Componentes/Inicio';
 import {Information }  from './Componentes/Inicio';
 import { HistorialServicio, LoginClientes, EstadoServicio } from './Componentes/Clientes';
-import {AñadirServicio, LoginTrabajadores, ActualizarServicioM, RegistrarServicio, AgregarServicios, AñadirProgreso, GestionarServicios} from './Componentes/Trabajadores'
+import {AñadirServicio, LoginTrabajadores, ActualizarServicioM, RegistrarServicio, AgregarServicios, AñadirProgreso, 
+  GestionarServicios, BuscarServicios} from './Componentes/Trabajadores'
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/AgregarServicioA" exact component={AgregarServicios} />
           <Route exact path="/AñadirProgresoA" exact component={AñadirProgreso} />
           <Route exact path="/GestionarServiciosA" exact component={GestionarServicios} />
+          <Route exact path="/BuscarServiciosM" exact component={BuscarServicios} />
         </div>
       </Switch>
     </BrowserRouter>
