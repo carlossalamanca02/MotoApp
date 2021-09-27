@@ -13,7 +13,16 @@ const storage=  multer.diskStorage({
     filename: function(req,file,cb){
         var name=Date.now()+"."+mimetypes.extension(file.mimetype)
         cb("",name);
-        connection.query('insert into estado set ?',{nombre_multimedia:name})
+        var placa = "IQP55F"
+        var descripcion=req.body.description
+        var estado=req.body.estado
+        var idRegi = 'select idReg from reg_servicio where id_moto = "'+placa+'" and finalizado = 0'
+        connection.query(idRegi,(error,results)=>{
+            connection.query('insert into estado set?',{id_servicio:results[0].idReg,descripcion:descripcion,nombre_multimedia:name,estado:estado})
+            if(error){
+                console.log(error)
+            }
+        })
 
     }
 })
@@ -133,21 +142,26 @@ router.post('/addservice',(req,res)=>{
     }
 })
 router.post('/sendfile',upload.any('files'),(req,res)=>{
-    var placa=req.body.placa
+    var placa="IQP55F"
+    //var placa=req.body.placa
     var descripcion=req.body.description
     var estado=req.body.estado
     var files= req.files
-    var cont = 0
-    for (x of files){
-        connection.query('select id from estado where id=(select max(id-'+cont+') from estado)',(error,results)=>{
-            console.log(results[0].id)
-            var sql= 'update estado set descripcion="'+descripcion+'" ,estado="'+estado+'" where id='+results[0].id
-            connection.query(sql)
+    if (files.length == 0){
+        var idRegi = 'select idReg from reg_servicio where id_moto = "'+placa+'" and finalizado = 0'
+        connection.query(idRegi,(error,results)=>{
+            connection.query('insert into estado set?',{id_servicio:results[0].idReg,descripcion:descripcion,estado:estado},(error)=>{
+                if (error){
+                    res.send({"res":1,"msg":"Se presento un error con la base de datos"})
+                }else{
+                    res.send({"res":2,"msg":"actualiazcion exitosa"})
+                }
+            })
         })
-        
-        cont++
-    }
-    
+    }else{
+        res.send({"res":3,"msg":"Archivos subidos al servidor"})
+    }    
 })
+
 
 module.exports = router

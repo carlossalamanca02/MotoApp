@@ -40,10 +40,7 @@ class ActualizarServicio extends Component{
                                             <option>Seleccione</option>
                                         </select>
                                     </div>
-                                    <div className="col-sm-8 mb-3">
-                                        <label for="exampleFormControlFile1">Fotos o videos</label>
-                                        <input multiple="multiple" type="file" className="form-control-file" name="files" id="archivo"></input>
-                                    </div>
+                                    
                                     <div className="col-sm-8 mb-3">
                                         <label for="exampleFormControlFile1">Descripción</label>
                                         <textarea className="form-control" name="description"></textarea>
@@ -55,6 +52,10 @@ class ActualizarServicio extends Component{
                                             <option>En proceso</option>
                                             <option>Finalizado</option>
                                         </select>
+                                    </div>
+                                    <div className="col-sm-8 mb-3">
+                                        <label for="exampleFormControlFile1">Fotos o videos</label>
+                                        <input multiple="multiple" type="file" className="form-control-file" name="files" id="archivo"></input>
                                     </div>
                                     <div className="col-sm-8 mb-3">
                                         <button className="btn btn-primary btnmoto" type="submit">Actualizar</button>

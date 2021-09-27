@@ -1,22 +1,12 @@
 import React, {Component} from "react";
 import './LoginTrabajadores.css'
 import { withRouter,Redirect } from 'react-router-dom';
-import Swal from 'sweetalert2';
-
 class LoginTrabajadores extends Component{
     state={
         redirect: false,
-        redirect2: false,
-        error:false,
-        vacio:false
+        redirect2: false
     }
  
-    alertaError = ()=>{
-        Swal.fire("Datos incorrectos", "Verifique que los datos ingresados son correctos","error")   
-   }
-   alertaVacio = ()=>{
-       Swal.fire("Campos vacios", "Ingrese todos los campos","warning")   
-   }
     peticion=()=>{
         var dat={"user": document.getElementById("User").value, "pass": document.getElementById("Pass").value}
         var url='http://localhost:9000/logWorker'
@@ -29,7 +19,7 @@ class LoginTrabajadores extends Component{
         .then(response => response.json())
         .then(data => {
             if(data==1){
-                this.setState({error:true})
+                alert("contraseña y/o usuarios mal")
             }else if(data.res==2){
                 if (data.op==0){
                     this.setState({redirect2: true}) 
@@ -37,7 +27,7 @@ class LoginTrabajadores extends Component{
                     this.setState({redirect: true}) 
                 }
             }else{
-                this.setState({vacio:true})
+                alert("campos vacios")
             }
 
         })
@@ -46,16 +36,10 @@ class LoginTrabajadores extends Component{
     render(){
         const {redirect}=this.state;
         const {redirect2}=this.state;
-        const {error}=this.state;
-        const {vacio}=this.state;
         if(redirect){
             return <Redirect to="/AñadirServicioMecanico"/>
         }else if(redirect2){
             return <Redirect to="/"/>
-        }else if(error){
-            this.alertaError();
-        }else if(vacio){
-            this.alertaVacio();
         }
         return(
             <section>

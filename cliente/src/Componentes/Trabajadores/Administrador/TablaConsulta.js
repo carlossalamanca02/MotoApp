@@ -1,12 +1,8 @@
 import React,{Component} from "react";
+import { GrSearch } from "react-icons/gr";
 import { BarraAdministrador } from ".";
-import {FaTools } from 'react-icons/fa'
-import {FcSearch} from 'react-icons/fc'
-import { GrUpdate } from "react-icons/gr";
 import './GestionarServicios.css'
-import { AiFillDelete } from "react-icons/ai";
-import TablaConsultas from "./TablaConsulta";
-class GestionarServicios extends Component{
+class TablaConsultas extends Component{
     render(){
         return(
             <>
@@ -14,23 +10,24 @@ class GestionarServicios extends Component{
                 <div className="container">
                     <div className="row titulo mb-3">
                         <div className="col-sm-1 iconoHistorial">
-                            <FaTools/>
+                            <GrSearch/>
                         </div>
                         <div className="col-sm-11">
-                            <h1>GESTIÓN DE SERVICIOS</h1>
-
+                            <h1>CONSULTA</h1>
                         </div>
                     </div>
                     <div className="row tabla">
                         <table className="table">
                             <thead className="cabeceraTabla">
                                 <tr>
-                                <th scope="col">Servicio</th>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Moto</th>
-                                <th scope="col">Consultar</th>
-                                <th scope="col">Actualizar</th>
-                                <th scope="col">Eliminar</th>
+                                    <th scope="col">Servicio</th>
+                                    <th scope="col">Cliente</th>
+                                    <th scope="col">Moto</th>
+                                    <th scope="col">Fecha de ingreso</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Descripcipon</th>
+                                    <th scope="col">Fecha de entrega</th>
+                                    <th scope="col">Fecha de entrega</  th>
                                 </tr>
                             </thead>
                             <tbody className="cuerpoTabla">
@@ -38,9 +35,11 @@ class GestionarServicios extends Component{
                                     <th scope="row">codigo1</th>
                                     <td>cliente</td>
                                     <td>moto</td>
-                                    <td className="ver"><FcSearch/></td>
-                                    <td className="ver"><GrUpdate/></td>
-                                    <td className="ver"><AiFillDelete/></td>
+                                    <td className="ver">xxxxx</td>
+                                    <td className="ver">xxxxxx</td>
+                                    <td className="ver">xxxxxx</td>
+                                    <td className="ver">xxxxxx</td>
+                                    <td className="ver">xxxxxx</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -52,4 +51,4 @@ class GestionarServicios extends Component{
 
 
 }
-export default GestionarServicios;
+export default TablaConsultas;
