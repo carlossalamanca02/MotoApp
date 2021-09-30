@@ -92,6 +92,33 @@ router.post('/serchclient',(req,res)=>{
         res.send({moto:null})
     }
 })
+router.post('/serchdata',(req,res)=>{
+    const placa=req.body.placa;
+    if(placa){
+        connection.query('SELECT* FROM moto WHERE placa = ?',[placa],  (error, results)=>{
+            if (error){
+                res.send({moto:null,cliente:null})
+            }
+            if(results[0]){
+                aux =results[0]
+                aux2=null
+                connection.query('SELECT* FROM cliente WHERE cedula = ?',[results[0].id_cliente],  (error, results)=>{
+                    if(error){
+                        res.send({moto:null,cliente:null})
+                    }
+                    res.send({moto:aux,cliente:results[0]})
+                })
+            }else{
+                res.send({moto:null})
+            }
+        })
+        
+    }else {
+        res.send({moto:null,cliente:null})
+    }
+})
+
+
 router.post('/addservice',(req,res)=>{
     const placa= req.body.placa;
     const modelo= req.body.modelo;
@@ -150,7 +177,13 @@ router.post('/sendfile',upload.any('files'),(req,res)=>{
     if (files.length == 0){
         var idRegi = 'select idReg from reg_servicio where id_moto = "'+placa+'" and finalizado = 0'
         connection.query(idRegi,(error,results)=>{
-            connection.query('insert into estado set?',{id_servicio:results[0].idReg,descripcion:descripcion,estado:estado},(error)=>{
+            var auxId= results[0].idReg
+            if (error){
+                res.send({"res":1,"msg":"Se presento un error con la base de dato3s"})
+            
+            }
+            console.log(auxId)
+            connection.query('insert into estado set?',{id_servicio:auxId,descripcion:descripcion,estado:estado},(error)=>{
                 if (error){
                     res.send({"res":1,"msg":"Se presento un error con la base de datos"})
                 }else{

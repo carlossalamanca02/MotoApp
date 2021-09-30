@@ -33,7 +33,7 @@ class ActualizarServicio extends Component{
                             </table>
                         </div>
                         <div className="col-sm-6">
-                            <form action="http://localhost:9000/sendfile" method="post" encType="multipart/form-data"  className="form-group">
+                        <form action="http://localhost:9000/sendfile" method="post" encType="multipart/form-data"  className="form-group">
                                 <div className="row">
                                     <div className="col-sm-8 mb-3">
                                         <select className="form-control" name="placa">
@@ -61,7 +61,6 @@ class ActualizarServicio extends Component{
                                         <button className="btn btn-primary btnmoto" type="submit">Actualizar</button>
                                     </div>
                                 </div>
-
                             </form>
                         </div>         
                     </div>
