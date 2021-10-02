@@ -19,8 +19,8 @@ export const itemsMecanico = [
     cName: 'nav-text' 
   },
   {
-    title: 'Gestionar Servicios',
-    path: '/GestionarServiciosM',
+    title: 'Mostrar Servicios',
+    path: '/BuscarServiciosM',
     icon: <FaExchangeAlt/>,
     cName: 'nav-text' 
   },

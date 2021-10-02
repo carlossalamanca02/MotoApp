@@ -125,9 +125,12 @@ class RegistrarServicio extends Component{
         alert(placa +" "+ modelo+ " "+ linea+" "+marca+" "+cedula+" "+nombre+" "+apellido+" "+direccion+" "+celular+" "+correo+" "+servicio+" "+fecha+" "+descripcion);
         var data={placa:placa,modelo:modelo,marca:marca,linea:linea,cedula:cedula,nombre:nombre,apellido:apellido,direccion:direccion,celular:celular,correo:correo,servicio:servicio,fecha:fecha,descripcion:descripcion}
         var url='http://localhost:9000/addservice'
+        var token= window.sessionStorage.getItem('jwt')
+        console.log(token)
+        
         fetch(url,{
             method:'post',
-            headers:{'Content-Type':'application/json'},
+            headers:{'Content-Type':'application/json','x-access-token':token},
             body:JSON.stringify(data)
         })
         .then(response => response.json())
@@ -138,10 +141,8 @@ class RegistrarServicio extends Component{
                 alert("Error")
             }
         })
-      
+        
     }
-
-
     render(){
         const {advertenciaCedula}=this.state;
         const {cedulaError}=this.state;
@@ -240,9 +241,9 @@ class RegistrarServicio extends Component{
                                     <div className="col-sm-6 mb-3">
                                         <label>Tipo de servicio</label>
                                         <select id="servicio" className="form-control" type="text"  name="tiposervicio">
-                                            <option>Tipo de servicio...</option>
-                                            <option>Reparacion</option>
-                                            <option>Mantenimiento</option>
+                                            <option value="0">Tipo de servicio...</option>
+                                            <option value="101">Reparacion</option>
+                                            <option value="102">Mantenimiento</option>
                                         </select>
                                     </div>
                                     <div className="col-sm-6 mb-3">

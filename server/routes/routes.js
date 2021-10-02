@@ -29,6 +29,7 @@ const storage=  multer.diskStorage({
 const upload = multer({
     storage: storage
 })
+/*
 router.post('/logWorker',async(req,res)=>{
     //let passe= await bycryp.hash("12345",8);
     //connection.query('insert into trabajador set ?',{codigo:"1007196929",id_cargo:"1001",id_taller:"123456789",cedula:"1007196929",nombre:"Erika Valentina",apellido:"Tinjaca Cely",usuario:"evtc",contraseña:passe,direccion:"Sogamoso",celular:"3132444663"})
@@ -54,6 +55,7 @@ router.post('/logWorker',async(req,res)=>{
         res.send("3")
     }
 });
+*/
 router.post('/logCustomer', (req,res)=>{
     const placa= req.body.placa;
     const cedula= req.body.cedula;
@@ -118,7 +120,7 @@ router.post('/serchdata',(req,res)=>{
     }
 })
 
-
+/*
 router.post('/addservice',(req,res)=>{
     const placa= req.body.placa;
     const modelo= req.body.modelo;
@@ -168,6 +170,7 @@ router.post('/addservice',(req,res)=>{
         res.send({"res":"Campos insuficientes"})
     }
 })
+*/
 router.post('/sendfile',upload.any('files'),(req,res)=>{
     var placa="IQP55F"
     //var placa=req.body.placa
