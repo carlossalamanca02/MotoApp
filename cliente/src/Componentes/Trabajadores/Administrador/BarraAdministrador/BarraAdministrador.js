@@ -6,6 +6,7 @@ import { itemsAdministrador, itemsMecanico } from "./itemsAdministrador";
 import { FaBars, FaUser } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
 import Mecanico from "../../../hooks/mecanico";
+import { IoMdLogOut } from 'react-icons/io'
 function BarraAdministrador(){
     const [desplegable,setDesplegable] = useState(false);
     const mostrarDesplegable = () => setDesplegable(!desplegable);
@@ -32,16 +33,12 @@ function BarraAdministrador(){
             }
         })
     }
-    
-    
-
     return(
         <>
             <div className="navbar">
                 <Link to='#' className="menu-bars">
                     <FaBars onClick={mostrarDesplegable}/>
                 </Link>
-                <button onClick={logoutb}>Bye</button>
             </div>
             <nav className={desplegable ? 'nav-menu active':'nav-menu'}>
                 <ul className='nav-menu-items'>
@@ -51,15 +48,15 @@ function BarraAdministrador(){
                         </Link>
                     </li>
                     <li>
-                        <div className="user">
+                        <div className="userAdmin">
                             <FaUser/>
                         </div>
                         <div className="credenciales">
                             <p>{state.nombreadmin+" "+state.apellidoadmin}</p>
                             <p>{state.cedulaamin}</p>
-                        </div>
-                        
+                        </div>                       
                     </li>
+                    <hr className="separador"></hr>
                     {itemsAdministrador.map((item,index) => {
                         return(
                             <li key={index} className={item.cName}>
@@ -70,6 +67,7 @@ function BarraAdministrador(){
                             </li>
                         );
                     })}
+                    <button onClick={logoutb} className="botonS"><IoMdLogOut/>  Salir</button>
                 </ul>
             </nav>
         </> 

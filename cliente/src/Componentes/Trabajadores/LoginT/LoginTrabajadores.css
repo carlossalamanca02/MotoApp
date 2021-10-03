@@ -19,3 +19,6 @@
 #ingresar:hover{
     background-color: black;
 }
+.errorLogin{
+    color: #BA001F;
+}

@@ -5,7 +5,7 @@ import AgregarServicios from "./Administrador/AgregarServicio"
 import RegistrarServicio from "./Comun/RegistrarServicio"
 import AñadirProgreso from "./Administrador/AñadirProgreso"
 import GestionarServicios from "./Administrador/GestionarServicios"
-import BuscarServicios from "./Comun/BuscarServicios"
+import BuscarServicios from "./Mecanico/BuscarServicios"
 
 
 export{
@@ -17,5 +17,4 @@ export{
     AñadirProgreso, 
     GestionarServicios, 
     BuscarServicios, 
-
 }

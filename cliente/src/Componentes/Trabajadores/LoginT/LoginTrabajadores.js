@@ -3,6 +3,7 @@ import './LoginTrabajadores.css'
 import { withRouter,Redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Mecanico from "../../hooks/mecanico";
+import { GiSwallow } from "react-icons/gi";
 
 class LoginTrabajadores extends Component{
     state={
@@ -11,27 +12,12 @@ class LoginTrabajadores extends Component{
         error:false,
         vacio:false
     }
- 
-    alertaError = ()=>{
-        Swal.fire("Datos incorrectos", "Verifique que los datos ingresados son correctos","error")   
-   }
-   alertaVacio = ()=>{
-       Swal.fire("Campos vacios", "Ingrese todos los campos","warning")   
-   }
-   
 
 }
 
-
-
-
-
-
-
 export default function Login(){
-    
-    
-    
+
+    const [error,setError]=useState(false);
     const [user, setUser]=useState("");
     const [pass, setPass]=useState("");
     const {isAdmin,logged,login,validatedata,errorlogin} = Mecanico()
@@ -46,11 +32,27 @@ export default function Login(){
         }else{
             window.location.href='http://localhost:3000/AñadirServicioMecanico'
         }
-        
-        
+            
     }
-    return(
-        
+    const alertaError = ()=>{
+        Swal.fire({
+            title: "DATOS INCORRECTOS",
+            text: "Los datos ingresados no son correctos",
+            icon: "warning",
+            allowOutsideClick: true,
+            stopKeydownPropagation:true
+        });
+    }
+    const alertavalidar = ()=>{
+        Swal.fire({
+            title: "Validando credenciales",
+            allowOutsideClick: true,
+            stopKeydownPropagation:true,
+            showConfirmButton:false
+            
+        });
+    }
+    return(   
         <>
         <section>
                 <section className="container-fluid h-100 fondoT">
@@ -60,23 +62,23 @@ export default function Login(){
                             <section className="contenedor">
                                 <h3>INGRESAR</h3>
                                 <p>Ingrese sus datos</p>
+                                <p className="errorLogin">
+                                     {errorlogin && <strong>El usuario o la constraseña no son correctos</strong>}
+                                </p>
                                 <section className="form-group">
                                     <input id ="User" type="text" onChange={(e)=> setUser(e.target.value)} value={user} className="form-control form-control mb-3" placeholder="Usuario" name="usuario" />
                                     <input id="Pass" type="password" onChange={(e)=> setPass(e.target.value)} value={pass} className="form-control form-control mb-3" placeholder="Contraseña" name="contraseña"/>
                                     <button onClick={validate} className="btn btn-primary mb-3" id="ingresar">Ingresar</button>
-
                                 </section>
                                 <a>Cambiar contraseña</a>
                                 <br></br>
-
                             </section>
                         }
-                        {validatedata && <strong>Validando credenciales</strong>}
-                        {errorlogin && <strong>Se presento un error</strong>}
+                        {validatedata && alertavalidar()}
+                        
                         </section>
                     </section>  
-                </section>
-               
+                </section>    
             </section>
         </>  
     )

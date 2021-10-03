@@ -24,18 +24,6 @@ export const itemsMecanico = [
     icon: <FaExchangeAlt/>,
     cName: 'nav-text' 
   },
-  {
-    title: 'Buscar piezas',
-    path: '/',
-    icon: <AiOutlineFileSearch/>,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Salir',
-    path: '/',
-    icon: <AiOutlineLogout/>,
-    cName: 'nav-text'
-  },
 
-
+  
 ];

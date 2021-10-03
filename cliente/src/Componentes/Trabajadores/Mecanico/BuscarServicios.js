@@ -1,11 +1,56 @@
-import React, {Component} from "react";
-import './Servicio.css'
+import React,{Component} from "react";
+import { BarraMecanico } from ".";
+import {FaTools } from 'react-icons/fa'
+import {FcSearch} from 'react-icons/fc'
+import { AiFillCloseCircle } from "react-icons/ai";
 import { Button, Modal, ModalBody, ModalHeader} from "reactstrap";
-class ModalCOnsultar extends Component{
+class BuscarServicios extends Component{
+
+    state={
+        buscar:false
+    }
+
+    salida=()=>{
+        this.setState({buscar: !this.state.buscar})
+    }
     render(){
         return(
             <>
-             <Modal isOpen={this.state.buscar}>
+            <BarraMecanico/>
+            <div className="container">
+                <div className="row titulo mb-3">
+                    <div className="col-sm-1 iconoHistorial">
+                        <FaTools/>
+                    </div>
+                    <div className="col-sm-11">
+                        <h1>BUSCAR SERVICIO</h1>
+                    </div>
+                </div>
+                <div className="row tabla">
+                    <table className="table">
+                        <thead className="cabeceraTabla">
+                            <tr>
+                            <th scope="col">Servicio</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Moto</th>
+                            <th scope="col">Consultar</th>
+                            </tr>
+                        </thead>
+                        <tbody className="cuerpoTabla">
+                            <tr>
+                                <th scope="row">codigo1</th>
+                                <td>cliente</td>
+                                <td>moto</td>
+                                <td className="ver">
+                                    <span onClick={this.salida}><FcSearch /></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <Modal isOpen={this.state.buscar}>
                 <ModalHeader>
                     <div className="row">
                         <div className="col-sm-3 iconoBuscar">
@@ -50,8 +95,10 @@ class ModalCOnsultar extends Component{
                     </div>
                 </ModalBody>
             </Modal>
-            </>
-
-        );
-    }
+        </>
+    );
 }
+
+
+}
+export default BuscarServicios;

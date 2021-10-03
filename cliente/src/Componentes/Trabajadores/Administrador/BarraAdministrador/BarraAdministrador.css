@@ -71,9 +71,9 @@
 span {
   margin-left: 16px;
 }
-.user{
+.userAdmin{
   color: white;
-  font-size: 150px; 
+  font-size: 50px; 
   text-align: center;
 }
 li{
@@ -82,5 +82,20 @@ li{
 .credenciales{
   text-align: center;
   font-size: 18px;
+  color: white;
+}
+.botonS{
+  background-color: #080B28;
+  border: #080B28;
+  color: white;
+  font-size: 18px;
+  margin-left: 25px;
+}
+.botonS:hover{
+  background-color: #BA001F;
+  border: #BA001F;
+}
+.separador{
+  border: 10px;
   color: white;
 }

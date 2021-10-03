@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { itemsMecanico } from "./itemsMecanico";
 import { FaBars, FaUser } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
+import { IoMdLogOut } from 'react-icons/io'
 import Mecanico from "../../../hooks/mecanico";
 
 function BarraMecanico(){
@@ -33,15 +34,19 @@ function BarraMecanico(){
             }
         })
     }
-
-
     return(
         <>
             <div className="navbar">
-                <Link to='#' className="menu-bars">
-                    <FaBars onClick={mostrarDesplegable}/>
-                </Link>
-                <button onClick={logoutb}>Bye</button>
+                <div className="row  justify-content-between">
+                    <div className="col-sm-8 align-self-start">
+                        <Link to='#' className="menu-bars">
+                            <FaBars onClick={mostrarDesplegable}/>
+                        </Link>
+                    </div>
+                    <div className="col-sm-4 align-self-end">
+                        
+                    </div>
+                </div>                
             </div>
             <nav className={desplegable ? 'nav-menu active':'nav-menu'}>
                 <ul className='nav-menu-items'>
@@ -51,12 +56,16 @@ function BarraMecanico(){
                         </Link>
                     </li>
                     <li>
+                        <div className="userMecanico">
+                            <FaUser/>
+                        </div>
                         <div className="credenciales">
                             <p>{state.nombremec+" "+state.apellidomec}</p>
                             <p>{state.cedulamec}</p>
                         </div>
                         
                     </li>
+                    <hr className="separador"></hr>
                     {itemsMecanico.map((item,index) => {
                         return(
                             <li key={index} className={item.cName} onClick={item.onclick}>
@@ -67,6 +76,7 @@ function BarraMecanico(){
                             </li>
                         );
                     })}
+                    <button onClick={logoutb} className="boton"><IoMdLogOut/>Salir</button>
                 </ul>
             </nav>
         </> 

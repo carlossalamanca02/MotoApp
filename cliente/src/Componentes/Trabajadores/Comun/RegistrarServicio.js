@@ -152,16 +152,22 @@ class RegistrarServicio extends Component{
         const {advertenciamodelo2}=this.state;
         if(advertenciaCedula){
             this.advertenciaCedula()
+
         }else if(cedulaError){
             this.alertaCedula();
+            this.setState({advertenciaCedula:false});
         }else if(placa){
             this.alertaPlaca();
+            this.setState({placa:false});
         }else if(correo){
             this.alertaCorreo();
+            this.setState({correo:false});
         }else if(advertenciamodelo1){
+            this.setState({advertenciamodelo1:false});
             this.advertenciaModeloLetras();
         }else if(advertenciamodelo2){
             this.advertenciaModeloaño();
+            this.setState({advertenciamodelo2:false});
         }
         return(
             <>
@@ -187,8 +193,7 @@ class RegistrarServicio extends Component{
                                             <input id="placa" className="form-control" type="text" placeholder="Placa" name="placa" onBlur={this.validacionPla}></input>
                                         </div>
                                         <div className="col-sm-8 mb-3">
-                                            <input id="modelo" className="form-control" type="text" placeholder="Modelo" name="modelo" onBlur={this.validacionMod}></input>
-                                            
+                                            <input id="modelo" className="form-control" type="text" placeholder="Modelo" name="modelo" onBlur={this.validacionMod}></input>    
                                         </div>
                                         <div className="col-sm-8 mb-3">
                                             <input id="marca" className="form-control" type="text" placeholder="Marca" name="marca"></input>
@@ -200,7 +205,6 @@ class RegistrarServicio extends Component{
                                 </form>
                             </div>
                         </div>
-
                         <div className="col-sm 6 mb-3  cliente">
                             <div className="row titulocliente">
                                 <h4>CLIENTE</h4>
@@ -226,7 +230,6 @@ class RegistrarServicio extends Component{
                                         <div className="col-sm-8 mb-3">
                                             <input className="form-control" id="correo" type="text" placeholder="Correo" name="correo" onBlur={this.validacionCorreo}></input>
                                         </div>
-
                                   </div>
                                 </form>
                             </div>

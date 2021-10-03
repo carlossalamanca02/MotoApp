@@ -23,36 +23,5 @@ export const itemsAdministrador = [
     path: '/GestionarServiciosA',
     icon: <FaExchangeAlt/>,
     cName: 'nav-text'
-  },
-  {
-    title: 'Agregar personal',
-    path: '/',
-    icon: <AiOutlineUserAdd/>,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Gestionar personal',
-    path: '/',
-    icon: <FaUserCog/>,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Registrar pieza',
-    path: '/',
-    icon: <FaMotorcycle/>,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Gestionar piezas',
-    path: '/',
-    icon: <HiDocumentSearch/>,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Salir',
-    path: '/',
-    icon: <AiOutlineLogout/>,
-    cName: 'nav-text'
   }
-
 ];
