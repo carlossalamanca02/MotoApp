@@ -7,73 +7,103 @@ dotenv.config({path:'./env/.env'});
 const connection = require(path.join(__dirname,'../db/db'));
 const multer=require('multer')
 const mimetypes = require('mime-types')
+const validatetokens = require('../validatetokens/validate')
 
 const storage=  multer.diskStorage({
     destination: 'MediaFiles',
     filename: function(req,file,cb){
         var name=Date.now()+"."+mimetypes.extension(file.mimetype)
         cb("",name);
-        var placa = "IQP55F"
+        var placa = req.body.placa
         var descripcion=req.body.description
         var estado=req.body.estado
+        var fecha = new Date();
+        var anio = fecha.getFullYear();
+        var mes= fecha.getMonth()+1;
+        var dia = fecha.getDate();
+        var fechain=anio+'-'+mes+'-'+dia
         var idRegi = 'select idReg from reg_servicio where id_moto = "'+placa+'" and finalizado = 0'
         connection.query(idRegi,(error,results)=>{
-            connection.query('insert into estado set?',{id_servicio:results[0].idReg,descripcion:descripcion,nombre_multimedia:name,estado:estado})
             if(error){
-                console.log(error)
+                console.log("Se presento un error con la base de datos")
             }
-        })
+            if (estado == 0){
+                connection.query('insert into estado set?',{id_servicio:results[0].idReg,descripcion:descripcion,nombre_multimedia:name,estado:"En proceso",fecha_actualizacion:fechain},(error)=>{
+                    if (error){
+                        console.log("Se presento un error con la base de datos")
+                    }
+                })
+            }else{
+                connection.query('insert into estado set?',{id_servicio:results[0].idReg,descripcion:descripcion,nombre_multimedia:name,estado:"Finalizado",fecha_actualizacion:fechain},(error)=>{
+                    if (error){
+                        console.log("Se presento un error con la base de datos")
+                    }else{
+                        var update='update reg_servicio set finalizado= 1 where idReg = '+results[0].idReg
+                        connection.query(update,(err)=>{
+                            if(err){
+                                console.log("Se presento un error con la base de datos")
+                            }
+                        })
+                    }
+                })
+            }
 
+
+        })
     }
+
 })
+
 const upload = multer({
     storage: storage
 })
-/*
-router.post('/logWorker',async(req,res)=>{
-    //let passe= await bycryp.hash("12345",8);
-    //connection.query('insert into trabajador set ?',{codigo:"1007196929",id_cargo:"1001",id_taller:"123456789",cedula:"1007196929",nombre:"Erika Valentina",apellido:"Tinjaca Cely",usuario:"evtc",contraseña:passe,direccion:"Sogamoso",celular:"3132444663"})
-    const user= req.body.user;
-    const pass= req.body.pass;
-    let passencr= await bycryp.hash(pass,8);
-    if(user && pass){
-        connection.query('SELECT* FROM trabajador WHERE usuario = ?',[user],async (error,results,fields)=>{
-            if( results.length == 0 || !(await bycryp.compare(pass,results[0].contraseña)) ){
-                //error de contraseña o usuario
-                res.send("1");
+
+router.post('/sendfile',[validatetokens.validateadormec],upload.any('files'),(req,res)=>{
+    var placa=req.body.placa    
+    var descripcion=req.body.description
+    var estado=req.body.estado
+    var files= req.files
+    var fecha = new Date();
+    var anio = fecha.getFullYear();
+    var mes= fecha.getMonth()+1;
+    var dia = fecha.getDate();
+    var fechain=anio+'-'+mes+'-'+dia
+    if(files.length>0){
+        res.send({"res":"3","msg":"Archivos subidos al servidor"})
+    }else{
+        var idRegi = 'select idReg from reg_servicio where id_moto = "'+placa+'" and finalizado = 0'
+        connection.query(idRegi,(error,results)=>{
+            var auxId= results[0].idReg
+            if (error){
+                res.send({"res":"1","msg":"Se presento un error con la base de datos"})
+            
+            }
+            if (estado == 0){
+                connection.query('insert into estado set?',{id_servicio:auxId,descripcion:descripcion,estado:"En proceso",fecha_actualizacion:fechain},(error)=>{
+                    if (error){
+                      res.send({"res":"1","msg":"Se presento un error con la base de datos"})
+                    }else{
+                        res.send({"res":"2","msg":"actualiazcion exitosa"})
+                    }
+                })
             }else{
-                //ok
-                if(results[0].id_cargo == 1001){
-                    res.send({"res":"2", "op":"0"});
-                }else if(results[0].id_cargo == 1002){
-                    res.send({"res":"2", "op":"1"});
-                }
+                connection.query('insert into estado set?',{id_servicio:auxId,descripcion:descripcion,estado:"Finalizado",fecha_actualizacion:fechain},(error)=>{
+                    if (error){
+                       res.send({"res":"1","msg":"Se presento un error con la base de datos"})
+                    }else{
+                        var update='update reg_servicio set finalizado= 1 where idReg = '+auxId
+                        connection.query(update,(err)=>{
+                            if(err){
+                                res.send({"res":"1","msg":"Se presento un error con la base de datos"})
+                            }
+                        })
+                        res.send({"res":"2","msg":"actualiazcion exitosa"})
+                    }
+                })
             }
         })
-    }else{
-        //campos vacios
-        res.send("3")
-    }
-});
-*/
-router.post('/logCustomer', (req,res)=>{
-    const placa= req.body.placa;
-    const cedula= req.body.cedula;
-    if(placa && cedula){
-        connection.query('SELECT* FROM moto WHERE placa = ?',[placa],  (error, results)=>{
-            if(results.length == 0 || results[0].id_cliente != cedula){
-                //error de cedula o placa
-                res.send("1");
-            }else{
-                //Entro
-                res.send("2");
-            }
-        })
-    }else{
-        //Campos vacios
-        res.send("3");
-    }
-});
+    }   
+})        
 router.post('/serchclient',(req,res)=>{
     const placa=req.body.placa;
     if(placa){
@@ -119,6 +149,55 @@ router.post('/serchdata',(req,res)=>{
         res.send({moto:null,cliente:null})
     }
 })
+
+    
+
+/*
+router.post('/logWorker',async(req,res)=>{
+    //let passe= await bycryp.hash("12345",8);
+    //connection.query('insert into trabajador set ?',{codigo:"1007196929",id_cargo:"1001",id_taller:"123456789",cedula:"1007196929",nombre:"Erika Valentina",apellido:"Tinjaca Cely",usuario:"evtc",contraseña:passe,direccion:"Sogamoso",celular:"3132444663"})
+    const user= req.body.user;
+    const pass= req.body.pass;
+    let passencr= await bycryp.hash(pass,8);
+    if(user && pass){
+        connection.query('SELECT* FROM trabajador WHERE usuario = ?',[user],async (error,results,fields)=>{
+            if( results.length == 0 || !(await bycryp.compare(pass,results[0].contraseña)) ){
+                //error de contraseña o usuario
+                res.send("1");
+            }else{
+                //ok
+                if(results[0].id_cargo == 1001){
+                    res.send({"res":"2", "op":"0"});
+                }else if(results[0].id_cargo == 1002){
+                    res.send({"res":"2", "op":"1"});
+                }
+            }
+        })
+    }else{
+        //campos vacios
+        res.send("3")
+    }
+});
+*/
+router.post('/logCustomer', (req,res)=>{
+    const placa= req.body.placa;
+    const cedula= req.body.cedula;
+    if(placa && cedula){
+        connection.query('SELECT* FROM moto WHERE placa = ?',[placa],  (error, results)=>{
+            if(results.length == 0 || results[0].id_cliente != cedula){
+                //error de cedula o placa
+                res.send("1");
+            }else{
+                //Entro
+                res.send("2");
+            }
+        })
+    }else{
+        //Campos vacios
+        res.send("3");
+    }
+});
+
 
 /*
 router.post('/addservice',(req,res)=>{
@@ -171,33 +250,7 @@ router.post('/addservice',(req,res)=>{
     }
 })
 */
-router.post('/sendfile',upload.any('files'),(req,res)=>{
-    var placa="IQP55F"
-    //var placa=req.body.placa
-    var descripcion=req.body.description
-    var estado=req.body.estado
-    var files= req.files
-    if (files.length == 0){
-        var idRegi = 'select idReg from reg_servicio where id_moto = "'+placa+'" and finalizado = 0'
-        connection.query(idRegi,(error,results)=>{
-            var auxId= results[0].idReg
-            if (error){
-                res.send({"res":1,"msg":"Se presento un error con la base de dato3s"})
-            
-            }
-            console.log(auxId)
-            connection.query('insert into estado set?',{id_servicio:auxId,descripcion:descripcion,estado:estado},(error)=>{
-                if (error){
-                    res.send({"res":1,"msg":"Se presento un error con la base de datos"})
-                }else{
-                    res.send({"res":2,"msg":"actualiazcion exitosa"})
-                }
-            })
-        })
-    }else{
-        res.send({"res":3,"msg":"Archivos subidos al servidor"})
-    }    
-})
+
 
 
 module.exports = router

@@ -14,7 +14,7 @@ export default function Mecanico(){
             setstate({load:false,error:false})
             
             if(jwt.op.toString() == 0){
-                console.log("fdjhrfeuifgberferiohngioregioerngoierngioneroigneroingioerngirengoirengionerogneroignioerngioerngiornegioneroignioerngioerngioneroigniorns")
+               
                 //isadmin=true;
                 setstate({isadmin:true})
             }
