@@ -6,7 +6,7 @@ import { HistorialServicio, LoginClientes, EstadoServicio } from './Componentes/
 import {AñadirServicio, LoginTrabajadores, ActualizarServicioM, RegistrarServicio, AgregarServicios, AñadirProgreso, 
   GestionarServicios, BuscarServicios} from './Componentes/Trabajadores'
 import {ContextoMecanico} from './Componentes/contextos/mecanico'
-import Mecanico from './Componentes/hooks/mecanico';
+
 
 function App() {
   return (

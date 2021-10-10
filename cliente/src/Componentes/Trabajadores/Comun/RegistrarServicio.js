@@ -122,12 +122,9 @@ class RegistrarServicio extends Component{
         var servicio = document.getElementById("servicio").value
         var fecha = document.getElementById("fecha").value
         var descripcion = document.getElementById("descripcion").value
-        alert(placa +" "+ modelo+ " "+ linea+" "+marca+" "+cedula+" "+nombre+" "+apellido+" "+direccion+" "+celular+" "+correo+" "+servicio+" "+fecha+" "+descripcion);
         var data={placa:placa,modelo:modelo,marca:marca,linea:linea,cedula:cedula,nombre:nombre,apellido:apellido,direccion:direccion,celular:celular,correo:correo,servicio:servicio,fecha:fecha,descripcion:descripcion}
         var url='http://localhost:9000/addservice'
         var token= window.sessionStorage.getItem('jwt')
-        console.log(token)
-        
         fetch(url,{
             method:'post',
             headers:{'Content-Type':'application/json','x-access-token':token},
@@ -136,9 +133,9 @@ class RegistrarServicio extends Component{
         .then(response => response.json())
         .then(data => {
             if(data.res != null){
-                alert(data.res)
+                Swal.fire("Confirmación",data.res,"success")
             }else{
-                alert("Error")
+                Swal.fire("Error en el servidor","Se presentó un error con la base de datos, espere un momento mientras se soluciona", "error")
             }
         })
         

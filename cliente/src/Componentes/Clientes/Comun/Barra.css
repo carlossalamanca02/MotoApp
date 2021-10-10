@@ -6,11 +6,13 @@
   display: flex;
   justify-content: start;
   align-items: center;
+  position: relative;
 }
 .menu-bars {
   margin-left: 2rem;
   font-size: 2rem;
   background: none;
+  position: relative;
 }
 
 .nav-menu {
@@ -19,7 +21,7 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  position: fixed;
+  position: relative;
   top: 0;
   left: -100%;
   transition: 850ms;

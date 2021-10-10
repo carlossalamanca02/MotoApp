@@ -3,7 +3,6 @@ const dotenv= require('dotenv');
 dotenv.config({path:'./env/.env'});
 const connection = require(path.join(__dirname,'../../db/db'));
 module.exports = async( {body}, res ) => {
-    console.log(body)
     const placa= body.placa;
     const modelo= body.modelo;
     const marca = body.marca;
@@ -17,7 +16,7 @@ module.exports = async( {body}, res ) => {
     const servicio= body.servicio;
     const fecha= body.fecha;
     const descripcion= body.descripcion
-    const idmecanico=body.idmeca
+    const idmecanico=body.id
     if (placa && modelo && marca && linea && cedula && nombre && apellido && direccion
         && celular && correo && servicio && fecha && descripcion){
         connection.query('select* from cliente where cedula=?',[cedula],(err,results)=>{
@@ -61,9 +60,11 @@ module.exports = async( {body}, res ) => {
                 connection.query('insert into reg_servicio set?',{id_moto:placa,id_trabajador:idmecanico,id_tiposervicio:servicio,descripcion:descripcion,fechaingreso:fecha,finalizado:false},err=>{
                     if(err){
                         res.status(404).send({"res":"Se presento un error en la base de datos"})
+                    }else{
+                        res.status(200).send({"res":"Creado primer servicio"})
                     }
                 })
-                res.status(200).send({"res":"Creado primer servicio"})
+               
             }
         })
     }else{

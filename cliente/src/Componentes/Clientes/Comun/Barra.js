@@ -5,11 +5,34 @@ import { Link } from 'react-router-dom';
 import { itemsBarra } from "./itemsBarra";
 import { FaBars, FaUser } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
-
+import Mecanico from "../../hooks/mecanico";
+import { IoMdLogOut } from 'react-icons/io'
 function Barra(){
     const [desplegable,setDesplegable] = useState(false);
     const mostrarDesplegable = () => setDesplegable(!desplegable);
-
+    const [state,setstate]=useState({placa:"000000",nombrecliente:"No registrado",apellidocliente:"No registrado"})
+    const {logout} = Mecanico();
+    const logoutb = (e) =>{
+        e.preventDefault();
+        logout();
+        window.location.href='http://localhost:3000/'
+    }
+    var url='http://localhost:9000/whoiamcliente'
+    var token= window.sessionStorage.getItem('jwt')
+    if (state.placa=="000000"){
+        fetch(url,{
+            method:'post',
+            headers:{'Content-Type':'application/json','x-access-token':token}
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data != null){
+                setstate({placa:data.placa,nombrecliente:data.nombre,apellidocliente:data.apellido})
+            }else{
+                alert("Error al obtener los datos del cliente")
+            }
+        })
+    }
     return(
         <>
             <div className="navbar">
@@ -25,15 +48,15 @@ function Barra(){
                         </Link>
                     </li>
                     <li>
-                        <div className="user">
+                        <div className="userAdmin">
                             <FaUser/>
                         </div>
                         <div className="credenciales">
-                            <p>Nombre Cliente</p>
-                            <p>Moto</p>
-                        </div>
-                        
+                            <p>{state.nombrecliente+" "+state.apellidocliente}</p>
+                            <p>{state.placa}</p>
+                        </div>    
                     </li>
+                    <hr className="separador"></hr>
                     {itemsBarra.map((item,index) => {
                         return(
                             <li key={index} className={item.cName}>
@@ -44,6 +67,7 @@ function Barra(){
                             </li>
                         );
                     })}
+                    <button onClick={logoutb} className="botonS"><IoMdLogOut/>  Salir</button>
                 </ul>
             </nav>
         </> 

@@ -38,20 +38,6 @@ function ActualizarServicio(){
         }).catch(err=>{
             Swal.fire("Error en el servidor","Se presentó un error con la base de datos, espere un momento mientras se soluciona", "error")
         })
-        
-        
-        
-        
-        
-        /*
-        .then(res => {
-            if(!res.ok) {
-                alert("error")
-            }else{
-                alert("todo bien")
-            }
-        })
-        */
     }
 
     return(

@@ -3,6 +3,7 @@ const dotenv= require('dotenv');
 dotenv.config({path:'./env/.env'});
 const accesstokenmec= process.env.ACCESSTOKEN;
 const accesstokenad= process.env.ACCESSTOKENAD;
+const accesstokencli= process.env.ACCESSTOKENCLI;
 validatemec = (req,res,next)=>{
     let token = req.headers["x-access-token"];
     if (!token){
@@ -53,5 +54,22 @@ validateadormec=(req,res,next)=>{
     }
     return next()
 }
-module.exports = {validatemec,validatead,validateadormec}
+validatecli = (req,res,next)=>{
+    let token = req.headers["x-access-token"];
+    if (!token){
+        return res.status(403).send({"msg":"Se debe estar autenticado para realizar esta accion"})
+    }
+    tken.verify(token,accesstokencli,(err,decoded)=>{
+        if(err){
+            return res.status(401).send({"msg":"No esta autorizado"})
+        }
+        req.body.placa=decoded.placa
+        req.body.modelo=decoded.modelo
+        req.body.cedula=decoded.cedula
+        req.body.linea=decoded.linea
+        req.body.marca=decoded.marca
+        next()
+    })
+}
+module.exports = {validatemec,validatead,validateadormec,validatecli}
 

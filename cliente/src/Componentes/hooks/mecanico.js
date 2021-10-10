@@ -4,7 +4,6 @@ import context from "../contextos/mecanico";
 import loginmec from "../servicios/login";
 
 export default function Mecanico(){
-    //var isadmin=false;
     const{jwt,setjwt} = useContext(context)
     const [state, setstate]=useState({load:false,error:false,isadmin:false})
     const login = useCallback((user,pass) => {
@@ -14,8 +13,6 @@ export default function Mecanico(){
             setstate({load:false,error:false})
             
             if(jwt.op.toString() == 0){
-               
-                //isadmin=true;
                 setstate({isadmin:true})
             }
             window.sessionStorage.setItem('jwt',jwt.token.toString())

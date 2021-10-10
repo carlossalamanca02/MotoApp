@@ -41,7 +41,7 @@
  
 }
 .fecha{
-    background-color: #080B28;
+    background-color: #BA001F;
     color: white;
     text-align: center;
     padding: 30px;
@@ -49,4 +49,23 @@
 }
 .cuadroactualización{
     margin: 10px;
+}
+
+.infoestado{
+    font-size: 30px;
+}
+.infofecha{
+    font-size: 25px;
+}
+
+.card-body{
+    height: calc(100% - XXpx);
+}
+.card-body>img{
+    width: 100%;
+    height: calc(100% - 60px);/*<-- Yo puse 60px porque más o menos es lo que mide la altura del título, pero tú coloca un número de pixeles que se ajuste*/
+    object-fit: contain;
+}
+.card-header{
+    background-color:#D5D8DC;
 }

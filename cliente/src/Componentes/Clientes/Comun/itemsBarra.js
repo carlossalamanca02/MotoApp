@@ -17,12 +17,6 @@ export const itemsBarra = [
     icon: <FaMotorcycle/>,
     cName: 'nav-text'
   },
-  {
-    title: 'Salir',
-    path: '/',
-    icon: <AiOutlineLogout/>,
-    cName: 'nav-text'
-  },
 
 
 ];
