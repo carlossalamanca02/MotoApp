@@ -8,6 +8,7 @@ const connection = require(path.join(__dirname,'../db/db'));
 const multer=require('multer')
 const mimetypes = require('mime-types')
 const validatetokens = require('../validatetokens/validate')
+const fs = require ('fs')
 
 const storage=  multer.diskStorage({
     destination: 'MediaFiles',
@@ -58,7 +59,7 @@ const upload = multer({
     storage: storage
 })
 
-router.post('/sendfile',[validatetokens.validateadormec],upload.any('files'),(req,res)=>{
+router.post('/sendfile',[validatetokens.validateadormec],upload.any('files'), async (req,res)=>{
     var placa=req.body.placa    
     var descripcion=req.body.description
     var estado=req.body.estado
@@ -69,19 +70,36 @@ router.post('/sendfile',[validatetokens.validateadormec],upload.any('files'),(re
     var dia = fecha.getDate();
     var fechain=anio+'-'+mes+'-'+dia
     if(files.length>0){
-        res.send({"res":"3","msg":"Archivos subidos al servidor"})
+        var idRegi = 'select idReg from reg_servicio where id_moto = "'+placa+'" and finalizado = 0'
+        connection.query(idRegi,(error,results)=>{
+            if(error){
+                res.send({"res":"1","msg":"Se presento un error con la base de datos"})
+            }else{
+                files.map((x)=>{
+                    const nombre_multimedia = fs.readFileSync(path.join(__dirname, '../MediaFiles/'+x.filename))
+                    connection.query('insert into estado set?',{nombre_multimedia,descripcion,estado},(error)=>{
+                        if (error){
+                            res.send({"res":"1","msg":"Se presento un error con la base de datos"})
+
+                        }else{
+                            res.send({"res":"3","msg":"Archivos subidos al servidor"})
+                        }                      
+                    })
+                })              
+            }
+        })
     }else{
         var idRegi = 'select idReg from reg_servicio where id_moto = "'+placa+'" and finalizado = 0'
         connection.query(idRegi,(error,results)=>{
             var auxId= results[0].idReg
             if (error){
-                res.send({"res":"1","msg":"Se presento un error con la base de datos"})
-            
+                res.send({"res":"1","msg":"Se presento un error con la base de datos"}) 
             }
             if (estado == 0){
                 connection.query('insert into estado set?',{id_servicio:auxId,descripcion:descripcion,estado:"En proceso",fecha_actualizacion:fechain},(error)=>{
+
                     if (error){
-                      res.send({"res":"1","msg":"Se presento un error con la base de datos"})
+                        res.send({"res":"1","msg":"Se presento un error con la base de datos"})
                     }else{
                         res.send({"res":"2","msg":"actualiazcion exitosa"})
                     }

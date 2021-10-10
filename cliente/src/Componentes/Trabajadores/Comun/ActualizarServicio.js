@@ -2,6 +2,7 @@ import React,{Component, useState} from "react";
 import {GrDocumentUpdate } from 'react-icons/gr'
 import './Servicio.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Swal from 'sweetalert2'
 
 function ActualizarServicio(){
     
@@ -16,7 +17,7 @@ function ActualizarServicio(){
         .then(data => {
             setstate({data:data})
         }).catch(err=>{
-            alert("Se presento un error")
+            Swal.fire("Error en el servidor","Se presentó un error con la base de datos, espere un momento mientras se soluciona", "error")
         })
     }
     
@@ -30,11 +31,12 @@ function ActualizarServicio(){
             body:info,
         }).then(res => res.json())
         .then(data => {
-            console.log(data)
-            alert(data.res)
+            console.log(data.res)
+            Swal.fire(data.msg, null, "success")
+
             //setstate({placas:data.placas})
         }).catch(err=>{
-            alert("Se presento un error")
+            Swal.fire("Error en el servidor","Se presentó un error con la base de datos, espere un momento mientras se soluciona", "error")
         })
         
         

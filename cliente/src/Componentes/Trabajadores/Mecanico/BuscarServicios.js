@@ -4,6 +4,7 @@ import {FaTools } from 'react-icons/fa'
 import {FcSearch} from 'react-icons/fc'
 import { AiFillCloseCircle } from "react-icons/ai";
 import { Button, Modal, ModalBody, ModalHeader} from "reactstrap";
+import Swal from 'sweetalert2'
 /*
 class BuscarServicios extends Component{
 
@@ -118,7 +119,7 @@ function BuscarServicios(){
         .then(data => {
             setstate({placas:data.placas})
         }).catch(err=>{
-            alert("Se presento un error")
+            Swal.fire("Error en el servidor","Se presentó un error con la base de datos, espere un momento mientras se soluciona", "error")
         })
     }
     const changestate = (placa,nombre,apellido,descripcion)=>{
@@ -134,10 +135,8 @@ function BuscarServicios(){
             setstate3({dataserh:data.info,lis:data.lis})
             
         }).catch(err=>{
-            alert("Se presento un error")
+            Swal.fire("Error en el servidor","Se presentó un error con la base de datos, espere un momento mientras se soluciona", "error")
         })
-        
-
         
     }
     const closewin = ()=>{
